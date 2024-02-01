@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+    <title>NBA Statistics Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .titlebar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0E0E0E;
+            color: #fff
+        }
+
+        /* Style the content */
+        .container {
+            background-color: #0E0E0E;
+            color: #fff;
+            padding: 10px;
+            height: 225%;
+        }
+
+        .row {
+        display: flex;
+        }
+
+        .column {
+        flex: 50%;
+        }
+
+        /* Style the footer */
+        .dropdownmenubar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0E0E0E;
+            color: #fff,
+        }
+    </style>
+</head>
+
+<body>
+    <div class="titlebar">
+        <h1>NBA Statistics Dashboard</h1>
+    </div>
+    <div class="dropdownmenubar">
+        <select id="selStat" onchange="getStat(this.value)"></select>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <h3>Position Performance</h3>
+                <div id="position_bar"></div>
+                <div id="position_scatter"></div>
+            </div>
+            <div class="column">
+                <h3>Age Performance</h3>
+                <div id="age_bar"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <h3>Yearly Performance</h3>
+                <div id="year_bar"></div>
+            </div>
+            <div class="column">
+                <h3>Player Aggression by Position</h3>
+                <select id="selAggression" onchange="getAggress(this.value)"></select>
+                <div id="aggression_scatter"></div>
+            </div>
+        </div>
+    </div>    
+
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="./Resources/js_files/position_performance.js"></script>
+    <script src="./Resources/js_files/age_performance.js"></script>
+    <script src="./Resources/js_files/yearly_performance.js"></script>
+    <script src="./Resources/js_files/player_aggression.js"></script>
+    <script src="./static/js/app.js"></script>
+
+</body>
+</html>
