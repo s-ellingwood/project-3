@@ -1,4 +1,4 @@
-let yearly_data = {
+{
     "minutes": {
         "overall": {
             "1997": 23.709148205457222,

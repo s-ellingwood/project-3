@@ -1,4 +1,4 @@
-let aggression_data = {
+{
     "fouls": {
         "point_guard": {
             "0": 1.0,
