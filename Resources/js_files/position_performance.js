@@ -1,4 +1,4 @@
-{
+let position_data = {
     "minutes_played": {
         "point guard": 23.986077599772205,
         "shooting guard": 24.169656280524922,
