@@ -14,13 +14,22 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        .titlebar {
+        .title {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #0E0E0E;
             color: #fff
+        }
+
+        .dropdownmenubar {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0E0E0E;
+            color: #fff,
         }
 
         /* Style the content */
@@ -38,21 +47,11 @@
         .column {
         flex: 50%;
         }
-
-        /* Style the footer */
-        .dropdownmenubar {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #0E0E0E;
-            color: #fff,
-        }
     </style>
 </head>
 
 <body>
-    <div class="titlebar">
+    <div class="title">
         <h1>NBA Statistics Dashboard</h1>
     </div>
     <div class="dropdownmenubar">
@@ -62,7 +61,6 @@
         <div class="row">
             <div class="column">
                 <h3>Position Performance</h3>
-                <div id="position_bar"></div>
                 <div id="position_scatter"></div>
             </div>
             <div class="column">
