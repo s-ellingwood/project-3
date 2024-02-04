@@ -6,46 +6,17 @@ console.log(aggression_data);
 // Display the default plots
 function init() {
     /////////////////////////////////////////////////
-    // Create a horizonal bar chart with a dropown menu to display the measurements of performance by position
-    // Set labels as position titles
-    // let positionLabels = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Center', 'Power Forward'];
-    // // Trace for bar graph data
-    // let positionTrace = {
-    //     type: 'bar',
-    //     x: Object.values(position_data.field_goal_rate),
-    //     y: positionLabels,
-    //     marker:{
-    //         color: ['#970000', '#E12C14', '#F55E00', '#FFA700', '#FFEE9D'],
-    //     },
-    //     orientation: 'h'
-    // };
-    // // Data trace array
-    // let positionArray = [positionTrace];
-    // // Apply title and margins to the layout
-    // let layout = {
-    //     font: {
-    //         color: '#fff'
-    //     },
-    //     height: 500,
-    //     width: 600,
-    //     paper_bgcolor: '#0E0E0E',
-    //     plot_bgcolor: '#0E0E0E',
-    //     yaxis: {
-    //         automargin: true
-    //     }
-    // };
-    // //Render the plot to the dive tag with id "position_bar"
-    // Plotly.newPlot('position_bar', positionArray, layout);
-
+    // Create a scatter plot to display the measurements of performance by position
+    // Trace for scatter plot and set labels as position titles (abbreviations)
     let positionTrace = {
         x: Object.values(position_data.total_points),
         y: Object.values(position_data.field_goal_rate),
-        text: ['Point Guard', 'Shooting Guard', 'Small Forward', 'Center', 'Power Forward'],
+        text: ['PG', 'SG', 'SF', 'C', 'PF'],
         type: 'scatter',
-        mode: 'markers',
+        mode: 'markers+text',
         marker: {
             color: Object.values(position_data.minutes_played),
-            colorscale: [[0, '#970000'], [1, '#FFEE9D']],
+            colorscale: [[0, '#970000'], [1, '#FFA002']],
             size: 30,
             sizemode: true,
             showscale: true,
@@ -57,10 +28,10 @@ function init() {
             }
         }
     };
-  
-      let positionArray = [positionTrace];
-      
-      let positionLayout = {
+    // Data trace array
+    let positionArray = [positionTrace];
+    // Define the layout  
+    let positionLayout = {
         font: {
             color: '#fff'
         },
@@ -75,16 +46,16 @@ function init() {
                 color: '#fff'
               }
             },
-          },
-      };
-
-      let configPosition = {responsive: true}
-      
-      Plotly.newPlot('position_scatter', positionArray, positionLayout, configPosition);
+        },
+    };
+    // Make the plot responsive to screensize
+    let configPosition = {responsive: true}
+    // Plot position performance scatter plot and assign to id 'position_scatter'
+    Plotly.newPlot('position_scatter', positionArray, positionLayout, configPosition);
 
     /////////////////////////////////////////////////
-    // Create a bar chart with a dropown menu to display the measurements of performance by age
-    // Set labels as ages titles
+    // Create a bar chart to display the measurements of performance by age
+    // Set labels as ages
     let ageLabels = Object.keys(age_data.minutes_played);
     // Trace for bar graph data
     let ageTrace = {
@@ -100,7 +71,7 @@ function init() {
     };
     // Data trace array
     let ageArray = [ageTrace];
-    // Apply title and margins to the layout
+    // Define the layout
     let ageLayout = {
         font: {
             color: '#fff'
@@ -117,13 +88,14 @@ function init() {
             },
           },
     };
+    // Make the chart responsive to screen width
     let configAge = {responsive: true}
-    //Render the plot to the dive tag with id "age_bar"
+    // Plot the bar chart and assign to the div tag with id "age_bar"
     Plotly.newPlot('age_bar', ageArray, ageLayout, configAge);
 
-    // /////////////////////////////////////////////////
-    // // Create a bar chart with a dropown menu to display the measurements of performance by year
-    // // Set labels as years
+    /////////////////////////////////////////////////
+    // Create a line graph to display the measurements of performance by year and position
+    // Set labels as years
     let yearLabels = Object.keys(yearly_data.field_goals.overall);
     // Trace for line graph data
     let overallTrace = {
@@ -189,7 +161,7 @@ function init() {
     };
     // Data trace array
     let yearArray = [pgTrace, sgTrace, sfTrace, cTrace, pfTrace, overallTrace]
-    // Apply margins to layout
+    // Define layout
     let yearLayout = {
         font: {
             color: '#fff'
@@ -206,10 +178,14 @@ function init() {
             },
         },
     };
+    // Make graph responsive to screen width
     let configYear = {responsive: true}
-    //Render the plot to the dive tag with id "age_bar"
+    // Generate the line graph and assign to the div tag with id "year_bar"
     Plotly.newPlot('year_bar', yearArray, yearLayout, configYear);
 
+    /////////////////////////////////////////////////
+    // Create a scatter chart for player aggression statistics by position
+    // Trace for scatter plot
     let aggpgTrace = {
         x: Object.values(aggression_data.fouls.point_guard),
         y: Object.values(aggression_data.rebounds.point_guard),
@@ -222,7 +198,6 @@ function init() {
         },
         name: 'Point Guard'
     };
-
     let aggsgTrace = {
         x: Object.values(aggression_data.fouls.shoot_guard),
         y: Object.values(aggression_data.rebounds.shoot_guard),
@@ -235,7 +210,6 @@ function init() {
         },
         name: 'Shooting Guard'
     };
-
     let aggsfTrace = {
         x: Object.values(aggression_data.fouls.small_forward),
         y: Object.values(aggression_data.rebounds.small_forward),
@@ -248,7 +222,6 @@ function init() {
         },
         name: 'Small Forward'
     };
-
     let aggcTrace = {
         x: Object.values(aggression_data.fouls.center),
         y: Object.values(aggression_data.rebounds.center),
@@ -261,7 +234,6 @@ function init() {
         },
         name: 'Center'
     };
-
     let aggpfTrace = {
         x: Object.values(aggression_data.fouls.power_forward),
         y: Object.values(aggression_data.rebounds.power_forward),
@@ -274,10 +246,10 @@ function init() {
         },
         name: 'Power Forward'
     };
-    
-      let aggressionArray = [aggpgTrace, aggsgTrace, aggsfTrace, aggcTrace, aggpfTrace];
-      
-      let aggressionLayout = {
+    // Data trace array
+    let aggressionArray = [aggpgTrace, aggsgTrace, aggsfTrace, aggcTrace, aggpfTrace];
+    // Define layout
+    let aggressionLayout = {
         font: {
             color: '#fff'
         },
@@ -303,21 +275,21 @@ function init() {
                 }
             }
         }
-      };
-
-      let configAggression = {responsive: true}
-      
-      Plotly.newPlot('aggression_scatter', aggressionArray, aggressionLayout, configAggression);
+    };
+    // Make plot responsive to screen width
+    let configAggression = {responsive: true}
+    // Create scatter plot and assign to div with id 'aggression_scatter'  
+    Plotly.newPlot('aggression_scatter', aggressionArray, aggressionLayout, configAggression);
 };
 
 /////////////////////////////////////////////////
-// Update Position Performance Bar Chart
-// Function called by DOM changes for position performance bar chart
+// Update Position Performance scatter plot, Age Perfromance bar chart, and Position Performance by Year line graph
+// Function called by DOM changes for the three charts
 function getStat() {
     let dropdownMenu = d3.select('#selStat');
     // Assign the values of the dropdown menu to a variable
     let dataset = dropdownMenu.node().value;
-    // Initialize an empty array for the performance indicator's data
+    // Initialize an empty array for eash set of data
     let positionData = [];
     let ageData = [];
     let yearData = [];
@@ -349,50 +321,24 @@ function getStat() {
         yearData = Object.values(yearly_data.minutes);
     }
 
-    // Call function to update the chart
+    // Call function to update the charts
     updateStats(positionData, ageData, yearData);
 };
 
-// Update the Position Performance chart values
+// Define function to update the three charts
 function updateStats(positions, ages, years) {
-    // ///////////////////////////////////////////////////
-    // // Update Position Bar Chart
-    // let positionLabels = ['Point Guard', 'Shooting Guard', 'Small Forward', 'Center', 'Power Forward'];
-    // // Update positionTrace for the position bar chart
-    // let positionTrace = {
-    //     type: 'bar',
-    //     x: Object.values(positions),
-    //     y: positionLabels,
-    //     marker:{
-    //         color: ['#970000', '#E12C14', '#FF680A', '#FFA700', '#FFEE9D'],
-    //     },
-    //     orientation: 'h'
-    // };
-    // // Data trace array
-    // let positionArray = [positionTrace];
-    // // Apply title and margins to the layout
-    // let layout = {
-    //     font: {
-    //         color: '#fff'
-    //     },
-    //     height: 500,
-    //     width: 600,
-    //     paper_bgcolor: '#0E0E0E',
-    //     plot_bgcolor: '#0E0E0E',
-    //     yaxis: {
-    //         automargin: true
-    //     }
-    // };
-
+    ///////////////////////////////////////////////////
+    // Update Position Performance scatter plot
+    // Trace for data
     let positionTrace = {
         x: Object.values(position_data.total_points),
         y: Object.values(positions),
-        text: ['Point Guard', 'Shooting Guard', 'Small Forward', 'Center', 'Power Forward'],
+        text: ['PG', 'SG', 'SF', 'C', 'PF'],
         type: 'scatter',
-        mode: 'markers',
+        mode: 'markers+text',
         marker: {
             color: Object.values(position_data.minutes_played),
-            colorscale: [[0, '#970000'], [1, '#FFEE9D']],
+            colorscale: [[0, '#970000'], [1, '#FFA002']],
             size: 30,
             sizemode: true,
             showscale: true,
@@ -404,9 +350,9 @@ function updateStats(positions, ages, years) {
             }
         }
     };
-
+    // Data trace array
     let positionArray = [positionTrace];
-    
+    // Layout
     let positionLayout = {
     font: {
         color: '#fff'
@@ -424,13 +370,13 @@ function updateStats(positions, ages, years) {
         },
         },
     };
-
+    // Responsive configuration
     let configPosition = {responsive: true}
 
     ///////////////////////////////////////////////////
     // Update Ages Bar Chart
     let ageLabels = Object.keys(age_data.minutes_played);
-    // Trace for bar graph data
+    // Trace for data
     let ageTrace = {
         type: 'bar',
         x: ageLabels,
@@ -444,7 +390,7 @@ function updateStats(positions, ages, years) {
     };
     // Data trace array
     let ageArray = [ageTrace];
-    // Apply title and margins to the layout
+    // Layout
     let ageLayout = {
         font: {
             color: '#fff'
@@ -461,11 +407,11 @@ function updateStats(positions, ages, years) {
             },
         },
     };
-
+    // Repsonsive configuration
     let configAge = {responsive: true}
 
-    // ///////////////////////////////////////////////////
-    // // Update Year line graph
+    //////////////////////////////////////////////////
+    // Update Year line graph
     let yearLabels = Object.keys(yearly_data.minutes.overall);
     // Trace for line graph data
     let overallTrace = {
@@ -531,7 +477,7 @@ function updateStats(positions, ages, years) {
     };
     // Data trace array
     let yearArray = [pgTrace, sgTrace, sfTrace, cTrace, pfTrace, overallTrace]
-    // Apply margins to layout
+    // Layout
     let yearLayout = {
         font: {
             color: '#fff'
@@ -548,16 +494,18 @@ function updateStats(positions, ages, years) {
             },
         },
     };
+    // Responsive configuration
     let configYear = {responsive: true}
-    // // Update the charts
+
+    // Update the three charts
     Plotly.newPlot('position_scatter', positionArray, positionLayout, configPosition);
     Plotly.newPlot('age_bar', ageArray, ageLayout, configAge);
     Plotly.newPlot('year_bar', yearArray, yearLayout, configYear);
 };
 
-// On change to the DOM, call getPosition()
+/////////////////////////////////////////////////
+// Create shared dropdown for Position Performance scatter plot, Age Perfromance bar chart, and Position Performance by Year line graph
 d3.selectAll("#selStat").on("change", getStat);
-
 //Set dropdown menu values
 let dropMenu = document.getElementById("selStat");
 let dropOptions = ['Field Goal Rate (%)', 'Rebound Rate', 'Free Throw Rate (%)', 'Total Points per Game',
@@ -571,18 +519,14 @@ for(var i = 0; i < dropOptions.length; i++) {
     dropMenu.appendChild(el);
 };
 
-
-
-
-
 /////////////////////////////////////////////////
-// Update Player Aggression scatter chart
+// Update Player Aggression scatter plot
 // Function called by DOM changes for player aggression scatter plot
 function getAggress() {
     let dropdownMenu = d3.select('#selAggression');
     // Assign the values of the dropdown menu to a variable
     let dataset = dropdownMenu.node().value;
-    // Initialize an empty array for the performance indicator's data
+    // Initialize an empty array for the data
     let playerAggression = [];
 
     // Use if statements to select data that correspends to the performance indicator selected in drowndown menu
@@ -597,8 +541,9 @@ function getAggress() {
     updateAggress(playerAggression);
 };
 
-// Update the Position Performance chart values
+// Define function to update player aggression scatter plot
 function updateAggress(newdata) {
+    // Trace data for scatter plot
     let aggpgTrace = {
         x: Object.values(aggression_data.fouls.point_guard),
         y: Object.values(newdata[0]),
@@ -611,7 +556,6 @@ function updateAggress(newdata) {
         },
         name: 'Point Guard'
     };
-
     let aggsgTrace = {
         x: Object.values(aggression_data.fouls.shoot_guard),
         y: Object.values(newdata[1]),
@@ -624,7 +568,6 @@ function updateAggress(newdata) {
         },
         name: 'Shooting Guard'
     };
-
     let aggsfTrace = {
         x: Object.values(aggression_data.fouls.small_forward),
         y: Object.values(newdata[2]),
@@ -637,7 +580,6 @@ function updateAggress(newdata) {
         },
         name: 'Small Forward'
     };
-
     let aggcTrace = {
         x: Object.values(aggression_data.fouls.center),
         y: Object.values(newdata[3]),
@@ -650,7 +592,6 @@ function updateAggress(newdata) {
         },
         name: 'Center'
     };
-
     let aggpfTrace = {
         x: Object.values(aggression_data.fouls.power_forward),
         y: Object.values(newdata[4]),
@@ -663,9 +604,9 @@ function updateAggress(newdata) {
         },
         name: 'Power Forward'
     };
-    
+    // Data trace array
     let aggressionArray = [aggpgTrace, aggsgTrace, aggsfTrace, aggcTrace, aggpfTrace];
-      
+    // Layout
     let aggressionLayout = {
         font: {
             color: '#fff'
@@ -673,16 +614,15 @@ function updateAggress(newdata) {
         showlegend: true,
         paper_bgcolor: '#0E0E0E',
         plot_bgcolor: '#0E0E0E',
-        // height: 700,
         xaxis: {
             title: {
-              text: 'Fouls per Game',
-              font: {
-                size: 13,
-                color: '#fff'
-              }
-            },
-          },
+                text: 'Fouls per Game',
+                font: {
+                    size: 13,
+                    color: '#fff'
+                }
+            }
+        },
         yaxis: {
             title: {
                 text: 'Total Rebounds per Game',
@@ -693,15 +633,15 @@ function updateAggress(newdata) {
             }
         }
     };
-
+    // Set responsive configuration
     let configAggression = {responsive: true}
-    // Update the chart
+    // Update the aggression stats scatter plot
     Plotly.newPlot('aggression_scatter', aggressionArray, aggressionLayout, configAggression);
 };
 
-// On change to the DOM, call getPosition()
+/////////////////////////////////////////////////
+// Create dropdown options for player aggression scatter plot
 d3.selectAll("#selAggression").on("change", getAggress);
-
 //Set dropdown menu values
 let dropMenu1 = document.getElementById("selAggression");
 let dropOptions1 = ['Fouls vs. Rebounds', 'Fouls vs. Blocks'];
