@@ -1,6 +1,7 @@
 # project-3
 
 Link to interactive dashboard: https://s-ellingwood.github.io/project-3/
+Link to presentation slides: https://docs.google.com/presentation/d/1FRkMNLgVnyoMm51J6doa0wojJRTPSEcPy4nfZl-orqw/edit?usp=sharing
 
 Using player data from NBA seasons 1997-98 through 2021-22, our goal was to gain insights into trends in performance. By comparing statistics like Points Scored, Field Goal Percentage, and Rebounds across different groupings (i.e. Age, Position, Season), some insightful information appears.
 
